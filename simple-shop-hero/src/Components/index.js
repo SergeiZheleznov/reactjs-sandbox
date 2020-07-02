@@ -1,3 +1,4 @@
+export * from './App/App';
 export * from './Header/Header';
 export * from './HeroImage/HeroImage';
 export * from './CartButton/CartButton';

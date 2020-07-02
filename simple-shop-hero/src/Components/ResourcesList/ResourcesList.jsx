@@ -8,7 +8,7 @@ export const ResourcesList = (props) => {
     <div className={styles.Wrapper}>
       {product.relatedResources.map(rr => {
         return(
-          <div>
+          <div key={`resource_${rr.id}`}>
             {rr.title}
           </div>
         );
