@@ -1,0 +1,43 @@
+@import '../../Styles/vars.scss';
+
+.Wrapper {
+
+  .RelatedResources {
+    max-width: $containerWidth;
+    margin: 0 auto;
+    margin-top: -96px;
+    
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: block;
+      li {
+        display: inline-block;
+        margin-right: 16px;
+        a {
+          display: inline-block;
+          font-weight: 200;
+          font-size: 22px;
+          line-height: 96px;
+          height: 96px;
+          padding: 0 32px;
+          text-decoration: none;
+          background-color: #e3e4e5;
+          color: #363b42;
+          border-radius: 3px 3px 0 0;
+        }
+        &.active {
+          a {
+            background-color: #fff;
+            color: $colorLinkActive;
+          }
+        }
+      }
+    }
+
+    .Container {
+      background-color: #fff;
+    }
+  }
+}

@@ -1,0 +1,27 @@
+@import '../../Styles/vars.scss';
+
+.Wrapper {
+   padding: 15px 0;
+   box-shadow: 0 2px 4px 0 rgba(0,0,0,.15);
+   background-color: #fff;
+   
+   .Container {
+      max-width: $containerWidth;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+   }
+   .Logo {
+      width: 104px;
+      height: 104px;
+      background-color: red;
+      display: block;
+      width: 126px;
+      height: 126px;
+      img {
+         width: 100%;
+      }
+   }
+
+}
