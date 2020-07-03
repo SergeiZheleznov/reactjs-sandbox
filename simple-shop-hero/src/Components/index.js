@@ -6,3 +6,5 @@ export * from './HeroAccordion/HeroAccordion';
 export * from './HeroTabs/HeroTabs';
 export * from './ResourcesList/ResourcesList';
 export * from './ResourceItem/ResourceItem';
+export * from './Logo/Logo';
+export * from './HeroAddToCartButton/HeroAddToCartButton';

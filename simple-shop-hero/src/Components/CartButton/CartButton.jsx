@@ -3,11 +3,12 @@ import styles from './CartButton.module.scss';
 import cartIcon from '../../Assets/IconCart.svg';
 
 export function CartButton(props) {
-  const {items, onClick} = props;
+  const {shoppingCart, addToCartHandler} = props;
+
   return(
-    <button onClick={onClick} className={styles.CartButton}>
+    <button onClick={addToCartHandler} className={styles.CartButton}>
       <img className={styles.Icon} alt="Cart" src={cartIcon} />
-      <span className={styles.Count}>{items.length}</span>
+      <span className={styles.Count}>{shoppingCart.items.length}</span>
     </button>
   );
 }

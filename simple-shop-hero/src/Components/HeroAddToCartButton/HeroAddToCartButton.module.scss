@@ -1,0 +1,16 @@
+.Base {
+  display: inline-block;
+  padding: 26px 22px;
+  font-size: 22px;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: #fff;
+  background-color: #d42f27;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+  &:hover {
+    background: #d00;
+  }
+}

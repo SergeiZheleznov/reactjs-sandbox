@@ -12,16 +12,12 @@
       justify-content: space-between;
       align-items: center;
    }
-   .Logo {
-      width: 104px;
-      height: 104px;
-      background-color: red;
-      display: block;
-      width: 126px;
-      height: 126px;
-      img {
-         width: 100%;
-      }
-   }
 
+}
+
+@media (max-width: $containerWidth + 15) {
+   .Wrapper {
+      padding-left: 15px;
+      padding-right: 15px;
+   }
 }

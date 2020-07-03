@@ -1,12 +1,12 @@
 @import '../../Styles/vars.scss';
 
-.Wrapper {
+.base {
 
-  .RelatedResources {
+  .relatedResources {
     max-width: $containerWidth;
-    margin: 0 auto;
-    margin-top: -96px;
-    
+    margin: -96px auto 0 auto;
+    position: relative;
+    z-index: 2;
     ul {
       margin: 0;
       padding: 0;

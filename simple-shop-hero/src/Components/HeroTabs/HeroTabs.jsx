@@ -1,11 +1,14 @@
 import React from 'react';
-import {HeroImage} from '../';
+import {
+  HeroImage,
+  HeroAddToCartButton,
+  ResourcesList
+} from '../';
 import styles from './HeroTabs.module.scss';
-import { ResourcesList } from '../';
 
 export const HeroTabs = (props) => {
 
-  const {products, activeProduct, setActiveProduct} = props;
+  const {products, activeProduct, setActiveProduct, addToCartHandler} = props;
 
   const onTabClickHandler = (event) => {
     event.preventDefault();
@@ -18,9 +21,11 @@ export const HeroTabs = (props) => {
   }
 
   return(
-    <div className={styles.Wrapper}>
-      {<HeroImage key={`product_${activeProduct.id}`} product={activeProduct} />}
-      <div className={styles.RelatedResources}>
+    <div className={styles.base}>
+      <HeroImage key={`product_${activeProduct.id}`} product={activeProduct} >
+        <HeroAddToCartButton addToCartHandler={addToCartHandler} product={activeProduct} />
+      </HeroImage>
+      <div className={styles.relatedResources}>
         <ul>
           {products.map(product => (
             <li className={product.id === activeProduct.id ? styles.active : ''} key={`product_${product.id}`}>
