@@ -25,14 +25,6 @@ export const App = () => {
   const fetchProducts = async () => {
     try {
       const products = await productService.getAllProducts();
-
-      const preloadedImages = [];
-      products.forEach(p => {
-        const imageToPreload = new Image();
-        imageToPreload.src = p.hero;
-        preloadedImages.push(imageToPreload);
-      });
-
       setProducts(products);
       setActiveProduct(products[0]);
     } catch (e) {
@@ -56,7 +48,7 @@ export const App = () => {
   }, []);
 
   window.addEventListener("resize", ()=>{
-    if (document.documentElement.clientWidth < 600) {
+    if (document.documentElement.clientWidth < 700) {
       if (collapsed) {
         return;
       }
@@ -74,31 +66,49 @@ export const App = () => {
   }
 
   const addToCartHandler = (event) => {
-    alert('added');
+    event.preventDefault();
 
     const cart = {...shoppingCart};
-    cart.items.push();
-    setShoppingCart(cart);
+    const el = event.currentTarget;
+    const productId = el.dataset.product;
+    if (productId) {
+      const productToAdd = products.find(p => p.id.toString() === productId)
+      cart.items.push(productToAdd);
+      setShoppingCart(cart);
+    }
+  }
+
+  const onCartButtonClickHandler = (event) => {
+    event.preventDefault();
+
+    (async () => {
+      const response = await shoppingCartService.removeAllItems();
+      if (response) {
+        const cart = {...shoppingCart};
+        cart.items = [];
+        setShoppingCart(cart);
+      }
+    })();
   }
 
   return (
     <div className={styles.App}>
       <Header>
         <Logo />
-        <CartButton shoppingCart={shoppingCart} onClick={()=>{ alert('open cart'); }} />
+        <CartButton shoppingCart={shoppingCart} onCartButtonClickHandler={onCartButtonClickHandler} />
       </Header>
       { collapsed ?
         <HeroAccordion
           activeProduct={activeProduct}
           products={products}
           setActiveProduct={setActiveProduct}
-          addToCartHandler={()=>{alert('addToCartHandler')}}
+          addToCartHandler={addToCartHandler}
         /> :
         <HeroTabs
           activeProduct={activeProduct}
           products={products}
           setActiveProduct={setActiveProduct}
-          addToCartHandler={()=>{alert('addToCartHandler')}}
+          addToCartHandler={addToCartHandler}
         />
       }
     </div>

@@ -3,12 +3,13 @@
   padding: 16px;
   -webkit-box-shadow: 2px 0 4px 0 rgba(0,0,0,.15);
   box-shadow: 2px 0 4px 0 rgba(0,0,0,.15);
-  .Inner {
+  position: relative;
+  .inner {
     overflow: hidden;
     position: relative;
     white-space: nowrap;
   }
-  .NextBtn {
+  .nextBtn {
     position: absolute;
     right: 0;
     top:0;
@@ -16,7 +17,7 @@
     background: #fff;
     outline: none;
   }
-  .PrevBtn {
+  .prevBtn {
 
   }
 }

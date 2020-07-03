@@ -7,7 +7,12 @@ export class ShoppingCartService {
   }
 
   async getItems(){
-    return [1,2,3,4];
+    return this._items;
+  }
+
+  async removeAllItems(){
+    this._items = [];
+    return true;
   }
 
   async addItem(product){

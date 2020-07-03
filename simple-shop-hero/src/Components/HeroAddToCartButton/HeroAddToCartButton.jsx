@@ -3,10 +3,9 @@ import styles from "./HeroAddToCartButton.module.scss";
 
 export const HeroAddToCartButton = (props) => {
   const {product, addToCartHandler} = props;
-
   return(
-    <a href="#" data-product={product.id} onClick={addToCartHandler} className={styles.Base}>
+    <button data-product={product.id} onClick={addToCartHandler} className={styles.base}>
       Add to basket
-    </a>
+    </button>
   );
 }

@@ -14,12 +14,12 @@ export const ResourcesList = (props) => {
 
   return(
     <div className={styles.base}>
-      <div className={styles.Inner}>
+      <div className={styles.inner}>
         {product.relatedResources.map(resource => (
           <ResourceItem key={`resource_${resource.id}`} onResourceClickHandler={onResourceClickHandler} resource={resource} />
         ))}
       </div>
-      <div className={styles.NextBtn} role="button" tabIndex={0} aria-label="Next">
+      <div className={styles.nextBtn} role="button" tabIndex={0} aria-label="Next">
         <img src={arrowRight} width={24} alt="Right"/>
       </div>
     </div>

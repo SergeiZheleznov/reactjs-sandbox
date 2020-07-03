@@ -1,16 +1,16 @@
-.CartButton {
+.base {
   position: relative;
   display: block;
   border: 0;
   background-color: transparent;
   cursor: pointer;
   outline: none;
-  .Icon {
+  .icon {
      width: 43px;
      display: inline-block;
      padding: 3px 12px 0 0;
   }
-  .Count {
+  .count {
      position: absolute;
      top:0;
      right: 0;
@@ -25,5 +25,14 @@
      font-weight: 600;
      line-height: 28px;
      border-radius: 999px;
+  }
+
+  .popover {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 15px;
   }
 }
