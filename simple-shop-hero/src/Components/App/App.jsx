@@ -9,7 +9,13 @@ import {
   HeroTabs,
   Logo
 } from '../';
-import {ProductService, ShoppingCartService} from "../../Services";
+import {
+  ProductService,
+  ShoppingCartService
+} from "../../Services";
+
+import socketIOClient from "socket.io-client";
+
 
 export const App = () => {
   const productService = new ProductService();
@@ -18,9 +24,7 @@ export const App = () => {
   const [products, setProducts] = useState([]);
   const [collapsed, setCollapsed] = useState(false);
   const [activeProduct, setActiveProduct] = useState(null);
-  const [shoppingCart, setShoppingCart] = useState({
-    items: []
-  });
+  const [shoppingCart, setShoppingCart] = useState({items: []});
 
   const fetchProducts = async () => {
     try {
@@ -32,31 +36,25 @@ export const App = () => {
     }
   }
 
-  const fetchShoppingCart = async () => {
-    const productsInCart = await shoppingCartService.getItems();
-    const cart = {...shoppingCart};
-    cart.items = productsInCart;
-    setShoppingCart(cart);
-  }
-
   useEffect(() => {
     fetchProducts().then();
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
-    fetchShoppingCart().then();
+    const socket = socketIOClient('/');
+    socket.on("ProductsInCart", data => {
+      setShoppingCart(JSON.parse(data));
+    });
+    // eslint-disable-next-line
   }, []);
 
+
   window.addEventListener("resize", ()=>{
-    if (document.documentElement.clientWidth < 700) {
-      if (collapsed) {
-        return;
-      }
+    const shouldCollapse = document.documentElement.clientWidth < 700;
+    if (shouldCollapse && !collapsed) {
       setCollapsed(true);
-    } else {
-      if (collapsed) {
-        return;
-      } 
+    } else if (!shouldCollapse && collapsed) {
       setCollapsed(false);
     }
   });
@@ -65,30 +63,24 @@ export const App = () => {
     return (<div>...Loading</div>);
   }
 
-  const addToCartHandler = (event) => {
+  const addToCartHandler = async (event) => {
     event.preventDefault();
-
-    const cart = {...shoppingCart};
     const el = event.currentTarget;
     const productId = el.dataset.product;
     if (productId) {
-      const productToAdd = products.find(p => p.id.toString() === productId)
-      cart.items.push(productToAdd);
-      setShoppingCart(cart);
+      const productToAdd = products.find(p => p.id.toString() === productId);
+      await shoppingCartService.addItem(productToAdd);
     }
   }
 
-  const onCartButtonClickHandler = (event) => {
+  const onCartButtonClickHandler = async (event) => {
     event.preventDefault();
-
-    (async () => {
-      const response = await shoppingCartService.removeAllItems();
-      if (response) {
-        const cart = {...shoppingCart};
-        cart.items = [];
-        setShoppingCart(cart);
-      }
-    })();
+    const response = await shoppingCartService.removeAllItems();
+    if (response) {
+      const cart = {...shoppingCart};
+      cart.items = [];
+      setShoppingCart(cart);
+    }
   }
 
   return (

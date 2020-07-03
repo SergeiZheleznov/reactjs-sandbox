@@ -1,23 +1,10 @@
 export class ShoppingCartService {
 
-  _items = [];
-
-  constructor() {
-    this._items = [];
-  }
-
-  async getItems(){
-    return this._items;
-  }
-
   async removeAllItems(){
-    this._items = [];
-    return true;
+    await fetch('/cart/clear');
   }
 
   async addItem(product){
-    this._items.push(product.id);
+    await fetch(`/cart/add/${product.id}`);
   }
-
-
 }
