@@ -3,10 +3,7 @@ import styles from './HeroImage.module.scss';
 
 export const HeroImage = (props) => {
 
-  const slideImg = {
-    url: 'https://via.placeholder.com/1920x785.png',
-    title: 'Slide'
-  };
+  const {product} = props;
 
   return(
     <div className={styles.Wrapper}>
@@ -16,7 +13,7 @@ export const HeroImage = (props) => {
             <button className={styles.AddToBasketBtn}>Add to basket</button>
           </div>
         </div>
-        <img alt="Img" src={slideImg.url} />
+        <img alt="Img" src={product.hero} />
       </div>
     </div>
   );

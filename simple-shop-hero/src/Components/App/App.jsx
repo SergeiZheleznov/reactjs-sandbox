@@ -7,26 +7,28 @@ import {
   HeroAccordion,
   HeroTabs
 } from '../';
-import {MockProductService} from "../../Services/MockProductService";
+import {ProductService} from "../../Services";
 
 export const App = () => {
 
-  const productService = new MockProductService();
+  const productService = new ProductService();
 
   const [products, setProducts] = useState([]);
   const [collapsed, setCollapsed] = useState(false);
-  const [activeProduct, setActiveProduct] = useState(undefined);
+  const [activeProduct, setActiveProduct] = useState(null);
+
+  const fetchProducts = async () => {
+    try {
+      const result = await productService.getAllProducts();
+      setProducts(result);
+      setActiveProduct(result[0]);
+    } catch (e) {
+      console.error(e)
+    }
+  }
 
   useEffect(() => {
-    (async ()=>{
-      try {
-        const result = await productService.getAllProducts();
-        setProducts(result);
-        setActiveProduct(result[0]);
-      } catch (e) {
-        console.error(e)
-      }
-    })();
+    fetchProducts();
   }, []);
 
   window.addEventListener("resize", ()=>{

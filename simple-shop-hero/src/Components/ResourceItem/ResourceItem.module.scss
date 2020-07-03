@@ -1,0 +1,19 @@
+a.Wrapper {
+  display: block;
+  margin-right: 16px;
+  text-decoration: none;
+  color: #363b42;
+  span.Title {
+    display: block;
+    font-size: 22px;
+    font-weight: bolder;
+    padding: 39px 18px;
+    background: #f1f2f3;
+  }
+
+  &:hover {
+    span.Title {
+      background: #e7e8e9;
+    }
+  }
+}

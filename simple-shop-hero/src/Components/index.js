@@ -5,3 +5,4 @@ export * from './CartButton/CartButton';
 export * from './HeroAccordion/HeroAccordion';
 export * from './HeroTabs/HeroTabs';
 export * from './ResourcesList/ResourcesList';
+export * from './ResourceItem/ResourceItem';

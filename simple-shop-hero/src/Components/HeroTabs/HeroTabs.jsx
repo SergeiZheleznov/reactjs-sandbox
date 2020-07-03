@@ -10,7 +10,10 @@ export const HeroTabs = (props) => {
   const onTabClickHandler = (event) => {
     event.preventDefault();
     const id = event.currentTarget.dataset.id;
-    const product = products.filter(p => p.id == id);
+    const product = products.filter(p => p.id.toString() === id);
+    if (product.length < 1) {
+      return;
+    }
     setActiveProduct(product[0]);
   }
 
@@ -20,7 +23,7 @@ export const HeroTabs = (props) => {
       <div className={styles.RelatedResources}>
         <ul>
           {products.map(product => (
-            <li className={product.id == activeProduct.id ? styles.active : ''} key={`product_${product.id}`}>
+            <li className={product.id === activeProduct.id ? styles.active : ''} key={`product_${product.id}`}>
               <a data-id={product.id} onClick={onTabClickHandler} href={`/#tab${product.id}`}>{product.title}</a>
             </li>
           ))}

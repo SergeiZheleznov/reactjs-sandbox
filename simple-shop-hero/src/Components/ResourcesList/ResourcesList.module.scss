@@ -1,3 +1,11 @@
 .Wrapper {
   background: #fff;
+  padding: 16px;
+  -webkit-box-shadow: 2px 0 4px 0 rgba(0,0,0,.15);
+  box-shadow: 2px 0 4px 0 rgba(0,0,0,.15);
+  .Inner {
+    display: flex;
+    overflow: hidden;
+    position: relative;
+  }
 }
