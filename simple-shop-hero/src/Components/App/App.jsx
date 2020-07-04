@@ -14,11 +14,10 @@ import {
   ShoppingCartService
 } from "../../Services";
 import socketIOClient from "socket.io-client";
-import {detectResourceListOverflow} from "../../utils";
+import {detectResourceListOverflow, debounce} from "../../utils";
 import Logger from "js-logger";
-
-Logger.useDefaults();
 const LOG_SOURCE = 'App.jsx';
+Logger.useDefaults();
 
 export const App = () => {
   const productService = new ProductService();
@@ -40,9 +39,21 @@ export const App = () => {
     }
   }
 
+  const defineHeroActiveComponent = () => {
+    const shouldCollapse = document.documentElement.clientWidth < 1024;
+    if (shouldCollapse && !collapsed) {
+      Logger.info(`${LOG_SOURCE}: Accordion view activated`);
+      setCollapsed(true);
+    } else if (!shouldCollapse && collapsed) {
+      Logger.info(`${LOG_SOURCE}: Tab view activated`);
+      setCollapsed(false);
+    }
+  }
+
   useEffect(() => {
     Logger.info(`${LOG_SOURCE}: component did mount`);
     fetchProducts().then();
+    defineHeroActiveComponent();
 
     const socket = socketIOClient('/');
     socket.on('ProductsInCart', data => {
@@ -51,15 +62,12 @@ export const App = () => {
     // eslint-disable-next-line
   }, []);
 
-  window.addEventListener('resize', ()=>{
-    const shouldCollapse = document.documentElement.clientWidth < 700;
-    if (shouldCollapse && !collapsed) {
-      setCollapsed(true);
-    } else if (!shouldCollapse && collapsed) {
-      setCollapsed(false);
-    }
+  const onWindowResize = debounce(function() {
+    defineHeroActiveComponent();
     detectResourceListOverflow()
-  });
+  }, 250);
+
+  window.addEventListener('resize', onWindowResize);
 
   if (products.length < 1 || !activeProduct){
     return (<div>...Loading</div>);

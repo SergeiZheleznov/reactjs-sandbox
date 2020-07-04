@@ -1,8 +1,19 @@
-.Wrapper {
-  width: 104px;
-  height: 104px;
+@import '../../Styles/vars.scss';
+
+.base {
   display: block;
   img {
-    width: 100%;
+    display: block;
+    width: 104px;
+    height: 104px;
+  }
+}
+
+@media (max-width: $breakPoint) {
+  .base {
+    img {
+      width: 77px;
+      height: 77px;
+    }
   }
 }

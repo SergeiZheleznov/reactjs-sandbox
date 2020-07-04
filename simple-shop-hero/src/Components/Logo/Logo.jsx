@@ -4,7 +4,7 @@ import Logotype from '../../Assets/logo.png';
 
 export const Logo = (props) => {
   return(
-    <a href="/" title={props.title} className={styles.Wrapper}>
+    <a href="/" title={props.title} className={styles.base}>
       <img alt={props.title} src={Logotype} />
     </a>
   );

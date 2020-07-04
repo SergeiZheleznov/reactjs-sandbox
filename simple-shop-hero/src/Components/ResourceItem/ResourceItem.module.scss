@@ -1,3 +1,4 @@
+@import '../../Styles/vars.scss';
 .base {
   flex-shrink: 0;
   position: relative;
@@ -8,19 +9,39 @@
     color: #363b42;
     overflow: hidden;
     border-radius: 4px;
-    line-height: 0;
 
-    span.Title {
-      display: block;
+    img {
+      max-width: 100%;
+    }
+
+    .title {
+      display: flex;
       font-size: 22px;
+      line-height: 22px;
       font-weight: bolder;
-      padding: 39px 18px;
+      padding: 0 18px;
       background: #f1f2f3;
+      height: 101px;
+      align-items: center;
+      span {
+        display: block;
+      }
     }
 
     &:hover {
-      span.Title {
+      .title {
         background: #e7e8e9;
+      }
+    }
+  }
+}
+
+@media (max-width: $breakPoint) {
+  .base {
+    max-width: 240px;
+    a {
+      .title {
+        height: 67px;
       }
     }
   }

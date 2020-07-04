@@ -7,37 +7,37 @@
       {
         "id": 11,
         "url": "/",
-        "title": "Related resource 1-1",
+        "title": "Link 1-1",
         "img": "/i/product_1/r1.jpg"
       },
       {
         "id": 12,
         "url": "/",
-        "title": "Related resource 1-2",
+        "title": "Link 1-2",
         "img": "/i/product_1/r2.jpg"
       },
       {
         "id": 13,
         "url": "/",
-        "title": "Related resource 1-3",
+        "title": "Link 1-3",
         "img": "/i/product_1/r3.jpg"
       },
       {
         "id": 14,
         "url": "/",
-        "title": "Related resource 1-4",
+        "title": "Link 1-4",
         "img": "/i/product_1/r4.jpg"
       },
       {
         "id": 15,
         "url": "/",
-        "title": "Related resource 1-5",
+        "title": "Sample 1-5",
         "img": "/i/product_1/r5.jpg"
       },
       {
         "id": 16,
         "url": "/",
-        "title": "Related resource 1-6",
+        "title": "Sample 1-6",
         "img": "/i/product_1/r6.jpg"
       }
     ]
@@ -50,19 +50,19 @@
       {
         "id": 21,
         "url": "/",
-        "title": "Related resource 2-1",
+        "title": "Link 2-1",
         "img": "/i/product_2/r1.jpg"
       },
       {
         "id": 22,
         "url": "/",
-        "title": "Related resource 2-2",
+        "title": "Link 2-2",
         "img": "/i/product_2/r2.jpg"
       },
       {
         "id": 23,
         "url": "/",
-        "title": "Related resource 2-3",
+        "title": "Link 2-3",
         "img": "/i/product_2/r3.jpg"
       }
     ]

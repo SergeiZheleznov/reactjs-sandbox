@@ -8,7 +8,9 @@ export const ResourceItem = (props) => {
     <div className={styles.base}>
       <a href={resource.url} onClick={onResourceClickHandler} className={styles.Wrapper}>
         <img src={resource.img} alt={resource.title} />
-        <span className={styles.Title}>{resource.title}</span>
+        <div className={styles.title}>
+          <span>{resource.title}</span>
+        </div>
       </a>
     </div>
   );
