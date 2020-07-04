@@ -23,7 +23,7 @@ export const HeroTabs = (props) => {
     const id = event.currentTarget.dataset.id;
     const product = products.find(p => p.id.toString() === id);
     if (!product) {
-      Logger.warn(`${LOG_SOURCE}: product with id=${id} was not founded!`);
+      Logger.warn(`${LOG_SOURCE}: product with id=${id} was not found!`);
       return;
     }
     setActiveProduct(product);
