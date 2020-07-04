@@ -1,23 +1,33 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   HeroImage,
   HeroAddToCartButton,
   ResourcesList
 } from '../';
 import styles from './HeroTabs.module.scss';
+import {detectResourceListOverflow} from "../../utils";
+import Logger from "js-logger";
+const LOG_SOURCE = 'HeroTabs.jsx';
 
 export const HeroTabs = (props) => {
 
   const {products, activeProduct, setActiveProduct, addToCartHandler} = props;
 
+  useEffect(() => {
+    Logger.info(`${LOG_SOURCE}: component did mount`);
+    detectResourceListOverflow();
+  },[activeProduct]);
+
   const onTabClickHandler = (event) => {
     event.preventDefault();
     const id = event.currentTarget.dataset.id;
-    const product = products.filter(p => p.id.toString() === id);
-    if (product.length < 1) {
+    const product = products.find(p => p.id.toString() === id);
+    if (!product) {
+      Logger.warn(`${LOG_SOURCE}: product with id=${id} was not founded!`);
       return;
     }
-    setActiveProduct(product[0]);
+    setActiveProduct(product);
+    Logger.info(`${LOG_SOURCE}: product was selected`, product);
   }
 
   return(

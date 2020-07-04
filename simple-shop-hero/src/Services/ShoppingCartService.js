@@ -6,5 +6,7 @@ export class ShoppingCartService {
 
   async addItem(product){
     await fetch(`/cart/add/${product.id}`);
+
+    return product;
   }
 }

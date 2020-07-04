@@ -1,23 +1,27 @@
-a.Wrapper {
-  display: inline-block;
-  margin-right: 16px;
-  text-decoration: none;
-  color: #363b42;
-  overflow: hidden;
-  border-radius: 4px;
-  line-height: 0;
-
-  span.Title {
+.base {
+  flex-shrink: 0;
+  position: relative;
+  a {
     display: block;
-    font-size: 22px;
-    font-weight: bolder;
-    padding: 39px 18px;
-    background: #f1f2f3;
-  }
+    margin-right: 16px;
+    text-decoration: none;
+    color: #363b42;
+    overflow: hidden;
+    border-radius: 4px;
+    line-height: 0;
 
-  &:hover {
     span.Title {
-      background: #e7e8e9;
+      display: block;
+      font-size: 22px;
+      font-weight: bolder;
+      padding: 39px 18px;
+      background: #f1f2f3;
+    }
+
+    &:hover {
+      span.Title {
+        background: #e7e8e9;
+      }
     }
   }
 }

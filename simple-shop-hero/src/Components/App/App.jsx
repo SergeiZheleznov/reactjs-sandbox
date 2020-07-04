@@ -13,9 +13,12 @@ import {
   ProductService,
   ShoppingCartService
 } from "../../Services";
-
 import socketIOClient from "socket.io-client";
+import {detectResourceListOverflow} from "../../utils";
+import Logger from "js-logger";
 
+Logger.useDefaults();
+const LOG_SOURCE = 'App.jsx';
 
 export const App = () => {
   const productService = new ProductService();
@@ -28,35 +31,34 @@ export const App = () => {
 
   const fetchProducts = async () => {
     try {
+      Logger.info(`${LOG_SOURCE}: fetchProducts`);
       const products = await productService.getAllProducts();
       setProducts(products);
       setActiveProduct(products[0]);
     } catch (e) {
-      console.error(e)
+      Logger.error(LOG_SOURCE, e);
     }
   }
 
   useEffect(() => {
+    Logger.info(`${LOG_SOURCE}: component did mount`);
     fetchProducts().then();
-    // eslint-disable-next-line
-  }, []);
 
-  useEffect(() => {
     const socket = socketIOClient('/');
-    socket.on("ProductsInCart", data => {
+    socket.on('ProductsInCart', data => {
       setShoppingCart(JSON.parse(data));
     });
     // eslint-disable-next-line
   }, []);
 
-
-  window.addEventListener("resize", ()=>{
+  window.addEventListener('resize', ()=>{
     const shouldCollapse = document.documentElement.clientWidth < 700;
     if (shouldCollapse && !collapsed) {
       setCollapsed(true);
     } else if (!shouldCollapse && collapsed) {
       setCollapsed(false);
     }
+    detectResourceListOverflow()
   });
 
   if (products.length < 1 || !activeProduct){
@@ -69,24 +71,21 @@ export const App = () => {
     const productId = el.dataset.product;
     if (productId) {
       const productToAdd = products.find(p => p.id.toString() === productId);
-      await shoppingCartService.addItem(productToAdd);
+      const addedProduct = await shoppingCartService.addItem(productToAdd);
+      Logger.info(`${LOG_SOURCE}: product was added to the basket`, addedProduct);
     }
   }
 
   const onCartButtonClickHandler = async (event) => {
     event.preventDefault();
-    const response = await shoppingCartService.removeAllItems();
-    if (response) {
-      const cart = {...shoppingCart};
-      cart.items = [];
-      setShoppingCart(cart);
-    }
+    await shoppingCartService.removeAllItems();
+    Logger.info(`${LOG_SOURCE}: shopping cart was emptied`);
   }
 
   return (
     <div className={styles.App}>
       <Header>
-        <Logo />
+        <Logo title="Shop Hero Section" />
         <CartButton shoppingCart={shoppingCart} onCartButtonClickHandler={onCartButtonClickHandler} />
       </Header>
       { collapsed ?
