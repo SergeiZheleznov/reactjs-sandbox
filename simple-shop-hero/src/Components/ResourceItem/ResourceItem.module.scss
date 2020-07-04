@@ -9,12 +9,12 @@
     color: #363b42;
     overflow: hidden;
     border-radius: 4px;
-
     img {
       max-width: 100%;
+      display: block;
     }
-
     .title {
+      transition: background-color .2s ease-in-out;
       display: flex;
       font-size: 22px;
       line-height: 22px;

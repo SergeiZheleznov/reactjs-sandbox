@@ -31,7 +31,7 @@ export const HeroAccordion = (props) => {
       {products.map(product => (
         <div key={`product_section_${product.id}`} className={`${styles.section}${product.id === activeProduct.id ? ' ' + styles.active : ''}`}>
           <div className={styles.header}>
-            <a data-id={product.id} href="#" onClick={onAccordionHeaderClick}>
+            <a data-id={product.id} href={`/#product_${product.id}`} onClick={onAccordionHeaderClick}>
               <span>{product.title}</span>
             </a>
           </div>
