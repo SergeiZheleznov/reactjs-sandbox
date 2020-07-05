@@ -81,6 +81,17 @@ export const App = () => {
     Logger.info(`${LOG_SOURCE}: shopping cart was emptied`);
   }
 
+  const selectProductHandler = (event) => {
+    event.preventDefault();
+    const id = event.currentTarget.dataset.id;
+    const product = products.find(p => p.id.toString() === id);
+    if (!product) {
+      Logger.warn(`${LOG_SOURCE}: product with id=${id} was not found!`);
+      return;
+    }
+    setActiveProduct(product);
+    Logger.info(`${LOG_SOURCE}: product was selected`, product);
+  }
 
   return (
     <div className={styles.App}>
@@ -92,13 +103,13 @@ export const App = () => {
         <HeroAccordion
           activeProduct={activeProduct}
           products={products}
-          setActiveProduct={setActiveProduct}
+          selectProductHandler={selectProductHandler}
           addToCartHandler={addToCartHandler}
         /> :
         <HeroTabs
           activeProduct={activeProduct}
           products={products}
-          setActiveProduct={setActiveProduct}
+          selectProductHandler={selectProductHandler}
           addToCartHandler={addToCartHandler}
         />
       }

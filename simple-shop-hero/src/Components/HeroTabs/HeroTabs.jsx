@@ -10,23 +10,11 @@ const LOG_SOURCE = 'HeroTabs.jsx';
 
 export const HeroTabs = (props) => {
 
-  const {products, activeProduct, setActiveProduct, addToCartHandler} = props;
+  const {products, activeProduct, selectProductHandler, addToCartHandler} = props;
 
   useEffect(() => {
     Logger.info(`${LOG_SOURCE}: component did mount`);
   },[activeProduct]);
-
-  const onTabClickHandler = (event) => {
-    event.preventDefault();
-    const id = event.currentTarget.dataset.id;
-    const product = products.find(p => p.id.toString() === id);
-    if (!product) {
-      Logger.warn(`${LOG_SOURCE}: product with id=${id} was not found!`);
-      return;
-    }
-    setActiveProduct(product);
-    Logger.info(`${LOG_SOURCE}: product was selected`, product);
-  }
 
   return(
     <div className={styles.base}>
@@ -37,7 +25,7 @@ export const HeroTabs = (props) => {
         <ul>
           {products.map(product => (
             <li className={product.id === activeProduct.id ? styles.active : ''} key={`product_${product.id}`}>
-              <a data-id={product.id} onClick={onTabClickHandler} href={`/#tab${product.id}`}>{product.title}</a>
+              <a data-id={product.id} onClick={selectProductHandler} href={`/#tab${product.id}`}>{product.title}</a>
             </li>
           ))}
         </ul>

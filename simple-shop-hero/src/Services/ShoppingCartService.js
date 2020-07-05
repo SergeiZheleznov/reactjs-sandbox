@@ -13,7 +13,7 @@ export class ShoppingCartService {
   }
 
   async addItem(product){
-    Logger.info(`${LOG_SOURCE}: removeAllItems`);
+    Logger.info(`${LOG_SOURCE}: addItem`);
     try {
       await fetch(`/cart/add/${product.id}`);
       return product;
