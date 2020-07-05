@@ -14,7 +14,7 @@ import {
   ShoppingCartService
 } from "../../Services";
 import socketIOClient from "socket.io-client";
-import {detectResourceListOverflow, debounce} from "../../utils";
+import {debounce} from "../../utils";
 import Logger from "js-logger";
 const LOG_SOURCE = 'App.jsx';
 Logger.useDefaults();
@@ -28,6 +28,14 @@ export const App = () => {
   const [products, setProducts] = useState([]);
   const [activeProduct, setActiveProduct] = useState(null);
   const [shoppingCart, setShoppingCart] = useState({items: []});
+
+  const detectResourceListOverflow = () => {
+    const el = document.getElementById('resources_list');
+    if (el) {
+      const nextBtn = document.getElementById('btn_next');
+      nextBtn.style.display = el.scrollWidth - 64 > el.clientWidth ? 'flex' : 'none';
+    }
+  }
 
   const fetchProducts = async () => {
     try {
@@ -50,12 +58,17 @@ export const App = () => {
     // eslint-disable-next-line
   }, []);
 
+  useEffect(()=>{
+    Logger.info(`${LOG_SOURCE}: active product was changed`);
+    detectResourceListOverflow();
+  },[activeProduct])
+
   const onWindowResize = debounce(function() {
     const newState = shouldBeCollapsed();
     if ( (newState && !collapsed) || (!newState && collapsed)) {
       setCollapsed(newState);
     }
-    detectResourceListOverflow()
+    detectResourceListOverflow();
   });
 
   window.addEventListener('resize', onWindowResize);

@@ -10,7 +10,8 @@
     overflow: hidden;
     border-radius: 4px;
     img {
-      max-width: 100%;
+      width: 100%;
+      max-width: 320px;
       display: block;
     }
     .title {
@@ -38,8 +39,10 @@
 
 @media (max-width: $breakPoint) {
   .base {
-    max-width: 240px;
     a {
+      img {
+        max-width: 240px;
+      }
       .title {
         height: 67px;
       }

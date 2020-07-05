@@ -1,21 +1,12 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {HeroAddToCartButton, HeroImage, ResourcesList} from '../';
-import {detectResourceListOverflow} from "../../utils";
 import styles from './HeroAccordion.module.scss';
-import Logger from "js-logger";
 import arrowRight from '../../Assets/IconArrowRight.svg';
 import arrowDown from '../../Assets/IconArrowDown.svg';
-
-const LOG_SOURCE = 'HeroAccordion.jsx';
 
 export const HeroAccordion = (props) => {
 
   const {products, activeProduct, selectProductHandler, addToCartHandler} = props;
-
-  useEffect(() => {
-    Logger.info(`${LOG_SOURCE}: component did mount`);
-    detectResourceListOverflow();
-  },[activeProduct]);
 
   return(
     <div className={styles.base}>
