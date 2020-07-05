@@ -5,7 +5,6 @@ import {
   ResourcesList
 } from '../';
 import styles from './HeroTabs.module.scss';
-import {detectResourceListOverflow} from "../../utils";
 import Logger from "js-logger";
 const LOG_SOURCE = 'HeroTabs.jsx';
 
@@ -15,7 +14,6 @@ export const HeroTabs = (props) => {
 
   useEffect(() => {
     Logger.info(`${LOG_SOURCE}: component did mount`);
-    detectResourceListOverflow();
   },[activeProduct]);
 
   const onTabClickHandler = (event) => {

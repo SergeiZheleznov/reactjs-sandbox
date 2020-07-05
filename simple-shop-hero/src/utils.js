@@ -6,17 +6,14 @@ export const detectResourceListOverflow = () => {
   }
 }
 
-// https://gist.github.com/treyhuffine/2ced8b8c503e5246e2fd258ddbd21b8c#file-debounce-js
-export const debounce = (func, wait) => {
-  let timeout;
-
-  return function executedFunction(...args) {
-    const later = () => {
-      timeout = null;
-      func(...args);
-    };
-
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-  };
-};
+// https://gist.github.com/nmsdvid/8807205#file-new_gist_file-js-L21
+export const debounce = (callback, delay = 250) => {
+  let timeoutId
+  return (...args) => {
+    clearTimeout(timeoutId)
+    timeoutId = setTimeout(() => {
+      timeoutId = null
+      callback(...args)
+    }, delay)
+  }
+}

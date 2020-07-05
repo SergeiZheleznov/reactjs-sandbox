@@ -6,7 +6,7 @@
     "name": "Sergei Zheleznov",
     "url": "https://github.com/SergeiZheleznov"
   },
-  "license": "UNLICENSED",
+  "license": "MIT",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
@@ -29,6 +29,10 @@
     "react-scripts": "3.4.1",
     "socket.io": "^2.3.0",
     "socket.io-client": "^2.3.0"
+  },
+  "engines": {
+    "node": ">=10.0.0",
+    "npm": ">=6.0.0"
   },
   "scripts": {
     "build": "node ./buildScript",

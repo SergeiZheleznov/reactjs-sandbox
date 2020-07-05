@@ -23,8 +23,9 @@ export const App = () => {
   const productService = new ProductService();
   const shoppingCartService = new ShoppingCartService();
 
+  const shouldBeCollapsed = () => (document.documentElement.clientWidth < 1024);
+  const [collapsed, setCollapsed] = useState(shouldBeCollapsed());
   const [products, setProducts] = useState([]);
-  const [collapsed, setCollapsed] = useState(false);
   const [activeProduct, setActiveProduct] = useState(null);
   const [shoppingCart, setShoppingCart] = useState({items: []});
 
@@ -39,22 +40,9 @@ export const App = () => {
     }
   }
 
-  const defineHeroActiveComponent = () => {
-    const shouldCollapse = document.documentElement.clientWidth < 1024;
-    if (shouldCollapse && !collapsed) {
-      Logger.info(`${LOG_SOURCE}: Accordion view activated`);
-      setCollapsed(true);
-    } else if (!shouldCollapse && collapsed) {
-      Logger.info(`${LOG_SOURCE}: Tab view activated`);
-      setCollapsed(false);
-    }
-  }
-
   useEffect(() => {
     Logger.info(`${LOG_SOURCE}: component did mount`);
     fetchProducts().then();
-    defineHeroActiveComponent();
-
     const socket = socketIOClient('/');
     socket.on('ProductsInCart', data => {
       setShoppingCart(JSON.parse(data));
@@ -63,9 +51,12 @@ export const App = () => {
   }, []);
 
   const onWindowResize = debounce(function() {
-    defineHeroActiveComponent();
+    const newState = shouldBeCollapsed();
+    if ( (newState && !collapsed) || (!newState && collapsed)) {
+      setCollapsed(newState);
+    }
     detectResourceListOverflow()
-  }, 250);
+  });
 
   window.addEventListener('resize', onWindowResize);
 
@@ -89,6 +80,7 @@ export const App = () => {
     await shoppingCartService.removeAllItems();
     Logger.info(`${LOG_SOURCE}: shopping cart was emptied`);
   }
+
 
   return (
     <div className={styles.App}>
