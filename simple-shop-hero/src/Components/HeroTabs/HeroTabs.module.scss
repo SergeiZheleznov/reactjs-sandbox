@@ -1,7 +1,6 @@
 @import '../../Styles/vars.scss';
 
 .base {
-
   .relatedResources {
     max-width: $containerWidth;
     margin: -96px auto 0 auto;
@@ -35,9 +34,19 @@
         }
       }
     }
-
     .Container {
       background-color: #fff;
+    }
+  }
+}
+
+@media (max-width: $containerWidth + 15) {
+  .base {
+    .relatedResources {
+      ul {
+        padding-left: 15px;
+        padding-right: 15px;
+      }
     }
   }
 }

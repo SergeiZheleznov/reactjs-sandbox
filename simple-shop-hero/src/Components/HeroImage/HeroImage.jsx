@@ -5,8 +5,8 @@ export const HeroImage = (props) => {
   const {product} = props;
   return(
     <div className={styles.base}>
-      <div className={styles.TopSection}>
-        <div className={styles.TopSectionContent}>
+      <div className={styles.topSection}>
+        <div className={styles.topSectionContent}>
           {props.children}
         </div>
       </div>
